@@ -1,0 +1,7 @@
+# This repository is a native Android (Kotlin/Gradle) app, so there is no
+# Node.js build. Netlify only serves the static APK download page.
+# Settings here take precedence over the build command and publish
+# directory configured in the Netlify UI.
+[build]
+  command = "echo 'Static site: no build step required'"
+  publish = "tmp/apk_server"
