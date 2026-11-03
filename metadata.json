@@ -1,0 +1,6 @@
+{
+  "name": "VNA Daily Production",
+  "description": "Warehouse VNA operator daily checklist, QR code plate scanning, shift target calculations, and exact replica A4 sheet printing.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
