@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="bn"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#12161b"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes">
+<title>VNA Daily Production</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;600;700&family=Orbitron:wght@800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#12161b;--c:#1c2128;--i:#12161b;--b:#2b323b;--t:#eef1f4;--m:#8b95a1;--a:#f2b400;--at:#1a1400;--g:#1f9d55;--w:#ff7b6b}
+*{box-sizing:border-box}html,body{margin:0}
+body{background:var(--bg);color:var(--t);font:16px/1.5 "Noto Sans Bengali",system-ui,sans-serif;padding-bottom:calc(84px + env(safe-area-inset-bottom,0px))}
+header{position:sticky;top:0;z-index:20;background:var(--bg);display:flex;align-items:center;gap:10px;padding:calc(env(safe-area-inset-top,0px) + 12px) 16px 10px}
+header h1{font-size:20px;margin:0;font-weight:700;flex:1}
+#mb{width:44px;height:44px;font-size:26px;padding:0;line-height:1}
+#menu{position:absolute;right:16px;top:calc(env(safe-area-inset-top,0px) + 62px);background:var(--c);border:1px solid var(--b);border-radius:14px;display:none;z-index:30;min-width:160px;overflow:hidden}
+#menu button{display:block;width:100%;border:0;border-radius:0;text-align:left;padding:14px 16px;background:var(--c)}
+main{max-width:640px;margin:auto;padding:8px 16px}
+.card{background:var(--c);border:1px solid var(--b);border-radius:18px;padding:18px;margin-bottom:16px}
+h2{font-size:21px;margin:0 0 14px;color:var(--a)}
+label{display:block;color:var(--m);margin:12px 0 6px;font-size:15px}
+input,textarea{width:100%;padding:14px;border:1px solid var(--b);border-radius:14px;background:var(--i);color:var(--t);font:inherit}
+button{font:inherit;border:1px solid var(--b);background:var(--i);color:var(--t);border-radius:14px;padding:12px 14px;cursor:pointer}
+button.pri,button.on{background:var(--a);color:var(--at);border-color:var(--a);font-weight:700}
+button.ok{background:var(--g);color:#fff;border-color:var(--g)}button:disabled{opacity:.4}
+.row{display:flex;gap:10px}.row>*{flex:1}.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.mode{padding:20px 8px;text-align:center;line-height:1.35}.mode small{display:block;font-weight:400;opacity:.8}
+.ck{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 8px;border-bottom:1px solid var(--b);border-radius:10px}
+.ck.miss{outline:2px solid var(--w)}.ck span{flex:1}.ck .bt{display:flex;gap:8px}.ck button{min-width:70px}
+.tile{background:var(--i);border-radius:14px;padding:12px 2px;text-align:center}.tile b{display:block;font-size:22px}.tile small{color:var(--m);font-size:12px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}.chip{background:var(--i);border:1px solid var(--b);border-radius:10px;padding:6px 12px}
+.msg{min-height:24px;margin-top:10px}.bad{color:var(--w)}.good{color:#3ddc84}
+table{width:100%;border-collapse:collapse}td,th{border:1px solid var(--b);padding:12px;text-align:left}
+#reader{border-radius:14px;overflow:hidden;position:relative}
+#ov{position:absolute;inset:0;display:none;align-items:center;justify-content:center;background:rgba(18,22,27,.85);font-size:34px;font-weight:700;color:var(--a);z-index:5}
+nav{position:fixed;left:0;right:0;bottom:0;display:flex;background:var(--c);border-top:1px solid var(--b);padding-bottom:env(safe-area-inset-bottom,0px)}
+nav button{flex:1;border:0;border-top:3px solid transparent;border-radius:0;background:none;color:var(--m);padding:20px 2px;font-weight:600}
+nav button.on{color:var(--t);border-top-color:var(--a)}
+.hc{padding:14px;border:1px solid var(--b);border-radius:14px;margin-bottom:10px;background:var(--i)}
+.sheet{display:none}
+@media print{@page{size:A4;margin:8mm}
+body{background:#fff;color:#000;padding:0;font-family:Arial,"Noto Sans Bengali",sans-serif}
+body>*:not(.sheet){display:none!important}.sheet{display:block}
+.pg{display:flex;page-break-after:always;color:#000}.pg:last-child{page-break-after:auto}.L{width:57%}.R{width:43%}.F{width:100%}
+.st{width:100%;border-collapse:collapse;table-layout:fixed;margin-bottom:5mm}
+.st td,.st th{border:1.2px solid #000;padding:1mm 1.5mm;font-size:8.5pt;color:#000;line-height:1.2;background:#fff}
+.st th,.st caption{font-weight:700;background:#e6e6e6}.st caption{border:1.2px solid #000;border-bottom:0;padding:1.5mm;text-align:center}
+.ck14 td{height:9.2mm}.bx td{height:8.6mm;font-size:11pt;text-align:center}.bx th{text-align:center}.cat td{height:7.5mm}.rs td{height:28mm}.sg td{height:8mm}.sm td{height:12mm;font-size:12pt}
+}
+</style></head><body>
+<header><svg width="40" height="40" viewBox="0 0 48 48" aria-label="VNA"><rect width="48" height="48" rx="12" fill="#f2b400"/><text x="24" y="30" text-anchor="middle" font-family="Orbitron,Arial,sans-serif" font-weight="800" font-size="14.5" fill="#1a1400">VNA</text></svg><h1>VNA Daily Production</h1><button id="mb" onclick="tm()">&#8942;</button></header>
+<div id="menu"><button onclick="view('hist')">হিস্ট্রি</button><button onclick="view('about')">অ্যাবাউট</button></div>
+<main id="app"></main><nav id="nav"></nav><div id="rf" style="display:none"></div><div class="sheet" id="sheet"></div>
+<script src="https://cdn.jsdelivr.net/npm/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+<script>
+const CH=[["VNA মেশিন চালুর পূর্ববর্তী পরিদর্শন সম্পন্ন করা হয়েছে",["OK","Not OK"]],["ব্যাটারি ও চার্জিং স্ট্যাটাস চেক করা হয়েছে",["OK","Not OK"]],["টায়ার, ব্রেক, হর্ন ও লাইট পরীক্ষা করা হয়েছে",["OK","Not OK"]],["সেফটি অ্যালার্ম / ইমার্জেন্সি সিস্টেম পরীক্ষা করা হয়েছে",["OK","Not OK"]],["VNA Aisle / Rack এলাকায় কোনো বাধা আছে কি না পরীক্ষা করা হয়েছে",["Clear","Issue"]],["লোডিংয়ের আগে Rack/Box লোকেশন যাচাই করা হয়েছে",["Yes","No"]],["কোনো ক্ষতি ছাড়াই Rack/Box লোডিং সম্পন্ন করা হয়েছে",["Yes","No"]],["আনলোডিংয়ের আগে Rack/Box লোকেশন যাচাই করা হয়েছে",["Yes","No"]],["ভুল লোকেশনে রাখা / ভুল স্থানে থাকা ইয়ার্ন শনাক্ত করা হয়েছে","Qty"],["ক্ষতিগ্রস্ত প্যালেট/প্লেট শনাক্ত করা হয়েছে","Qty"],["খালি লোকেশনের তথ্য আপডেট করা হয়েছে",["Done","Pending"]],["VNA-এর ডাউনটাইম, ব্রেকডাউন বা কারিগরি সমস্যা নথিভুক্ত করা হয়েছে","min"],["দুর্ঘটনা / নিকট-দুর্ঘটনা / নিরাপত্তাজনিত সমস্যা রিপোর্ট করা হয়েছে",["No","Yes"]],["শিফট শেষে VNA-এর অবস্থা পরীক্ষা করে সঠিকভাবে পার্ক করা হয়েছে",["Done","Pending"]]];
+const CAT={unload:["আনলোড","Plate Unload",85],load:["লোড","Plate Load",85],stock:["স্টক চেক","Stock Check Physically",10],hk:["হাউসকিপিং","Housekeeping / Segregation",10]};
+const K=["load","unload","stock","hk"],SH={A:"A (Morning)",B:"B (Evening)",C:"C (Night)",G:"G (General)"},SHOW=[0,1,2,3,4,5,6,7,10,12,13];
+const iso=()=>{const d=new Date(),p=n=>String(n).padStart(2,"0");return d.getFullYear()+"-"+p(d.getMonth()+1)+"-"+p(d.getDate())};
+const fd=d=>d?d.slice(8,10)+"."+d.slice(5,7)+"."+d.slice(2,4):"";
+const fresh=()=>({tab:"start",mode:"load",p:{name:"",desig:"",id:"",sup:"",shift:"",vna:"",date:iso()},chk:{},U:[],L:[],st:0,hk:0,reason:"",sid:Date.now()});
+let S=fresh(),V="main",HV=null,warn=false,scanner=null,last="",seen=0,pause=false,msg="";
+try{const x=localStorage.getItem("vdp2");if(x)S=Object.assign(fresh(),JSON.parse(x))}catch(e){}
+const save=()=>{try{localStorage.setItem("vdp2",JSON.stringify(S))}catch(e){}};
+const H=()=>{try{return JSON.parse(localStorage.getItem("vdp_h")||"[]")}catch(e){return[]}};
+const saveH=d=>{try{const a=H().filter(x=>x.sid!==d.sid);a.unshift(JSON.parse(JSON.stringify(d)));localStorage.setItem("vdp_h",JSON.stringify(a))}catch(e){}};
+const $=id=>document.getElementById(id);
+const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const num=el=>{el.value=el.value.replace(/\D/g,"")};
+const ready=()=>{for(let i=1;i<=8;i++)if(!S.chk[i])return false;const p=S.p;return !!(p.name&&p.id&&p.shift&&p.vna)};
+const cnt=(d,k)=>k==="load"?d.L.length:k==="unload"?d.U.length:d[k==="stock"?"st":"hk"];
+function tm(){const m=$("menu");m.style.display=m.style.display==="block"?"none":"block"}
+document.addEventListener("click",e=>{if(!e.target.closest("#menu,#mb"))$("menu").style.display="none"});
+function stopCam(){if(scanner){const s=scanner;scanner=null;s.stop().then(()=>s.clear()).catch(()=>{})}}
+function view(v){V=v;HV=null;$("menu").style.display="none";render()}
+function go(t){if(t!=="start"&&!ready()){S.tab="start";warn=true;V="main";save();render();return}S.tab=t;V="main";save();render()}
+function sp(k,v){S.p[k]=v;save()}
+function sc(i,v){S.chk[i]=v;save();render()}
+function sq(i,v){S.chk[i]=v;save()}
+
+function vStart(){const p=S.p,f=(l,k,t)=>`<label>${l}</label><input type="${t||"text"}" value="${esc(p[k])}" oninput="sp('${k}',this.value)">`;
+const seg=(k,o)=>`<div class="g2">${o.map(x=>`<button class="${p[k]===x[0]?"on":""}" onclick="sp('${k}','${x[0]}');render()">${x[1]}</button>`).join("")}</div>`;
+return `<div class="card"><h2>শিফট তথ্য</h2>${f("নাম","name")}${f("পদবী","desig")}${f("আইডি নম্বর","id")}${f("শিফট সুপারভাইজার","sup")}${f("তারিখ","date","date")}
+<label>শিফট নির্বাচন</label>${seg("shift",Object.keys(SH).map(k=>[k,SH[k]]))}<label>VNA নির্বাচন</label>${seg("vna",[["VNA 01","VNA 01"],["VNA 02","VNA 02"]])}</div>
+<div class="card"><h2>কাজ শুরুর চেকলিস্ট</h2>${SHOW.map(i=>{const o=CH[i][1],v=S.chk[i+1],miss=warn&&i<8&&!v,pos=i===12?"No":o[0];return `<div class="ck ${miss?"miss":""}"><span>${i+1}. ${CH[i][0]}</span><div class="bt">${o.map(x=>`<button class="${v===x?(x===pos?"ok":"on"):""}" onclick="sc(${i+1},'${x}')">${x}</button>`).join("")}</div></div>`}).join("")}</div>
+<button class="pri" style="width:100%" ${ready()?"":"disabled"} onclick="go('scan')">পরবর্তী</button>`}
+
+function vScan(){return `<div class="card"><h2>কী কাজ করছেন?</h2><div class="g2" id="modes"></div></div>
+<div class="card"><div class="row"><button class="pri" onclick="startCam()">ক্যামেরা চালু</button><button onclick="$('fi').click()">ছবি থেকে স্ক্যান</button></div>
+<input type="file" id="fi" accept="image/*" multiple hidden onchange="fromFiles(this.files);this.value=''">
+<div id="reader" style="margin-top:12px"><div id="ov"></div></div><div class="msg" id="msg">${msg}</div>
+<label>হাতে নম্বর লিখুন</label><div class="row"><input id="man" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="প্লেট নম্বর" oninput="num(this)" style="flex:3"><button class="pri" onclick="add($('man').value);$('man').value=''">যোগ</button></div></div>
+<div class="card"><div class="g4" id="tiles" style="margin-bottom:14px"></div><h2 id="lt"></h2><div id="lst"></div></div>`}
+function refresh(){if(!$("modes"))return;
+$("modes").innerHTML=K.map(k=>`<button class="mode ${S.mode===k?"on":""}" onclick="S.mode='${k}';save();refresh()">${CAT[k][0]}<small>${CAT[k][1]}</small></button>`).join("");
+$("tiles").innerHTML=K.map(k=>`<div class="tile"><b>${cnt(S,k)}</b><small>${CAT[k][0]} / ${CAT[k][2]}</small></div>`).join("");
+const m=S.mode;$("lt").textContent=CAT[m][0]+" ("+cnt(S,m)+")";
+if(m==="load"||m==="unload"){const a=m==="load"?S.L:S.U;$("lst").innerHTML=a.length?`<div class="chips">${a.map((x,i)=>`<span class="chip" onclick="del(${i})">${esc(x)}</span>`).join("")}</div>`:`<span style="color:var(--m)">এখনো কিছু স্ক্যান হয়নি</span>`}
+else $("lst").innerHTML=`<div class="row"><div class="big" style="font-size:40px;font-weight:700;text-align:center">${cnt(S,m)}</div><button onclick="S[S.mode==='stock'?'st':'hk']=Math.max(0,cnt(S,S.mode)-1);save();refresh()">-1</button></div>`}
+function say(m,bad){msg=`<span class="${bad?"bad":"good"}">${m}</span>`;if($("msg"))$("msg").innerHTML=msg}
+function beep(){try{const a=new (window.AudioContext||window.webkitAudioContext)(),o=a.createOscillator();o.frequency.value=880;o.connect(a.destination);o.start();setTimeout(()=>{o.stop();a.close()},120)}catch(e){}}
+function add(v,quiet){v=String(v||"").trim();const m=S.mode;
+if(m==="load"||m==="unload"){if(!v)return false;(m==="load"?S.L:S.U).push(v)}else S[m==="stock"?"st":"hk"]++;
+save();refresh();if(!quiet){beep();try{navigator.vibrate&&navigator.vibrate(70)}catch(e){}say(m==="load"||m==="unload"?esc(v)+" যোগ হয়েছে":CAT[m][0]+" +1")}return true}
+function del(i){if(confirm("এই এন্ট্রি মুছবেন?")){(S.mode==="load"?S.L:S.U).splice(i,1);save();refresh()}}
+function startCam(){stopCam();if(typeof Html5Qrcode==="undefined"){say("স্ক্যানার লোড হয়নি",1);return}
+try{scanner=new Html5Qrcode("reader");scanner.start({facingMode:"environment"},{fps:10,qrbox:230},t=>{const n=Date.now();
+if(t===last&&n-seen<1000){seen=n;return}if(pause)return;
+last=t;seen=n;pause=true;add(S.mode==="load"||S.mode==="unload"?t:"1");const o=$("ov");if(o){o.textContent=S.mode==="load"||S.mode==="unload"?t:"+1";o.style.display="flex"}
+setTimeout(()=>{pause=false;const o=$("ov");if(o)o.style.display="none"},2000)},()=>{}).catch(()=>{scanner=null;say("ক্যামেরা চালু হয়নি, অনুমতি দিন",1)})}catch(e){say("ক্যামেরা পাওয়া যায়নি",1)}}
+async function fromFiles(fl){if(typeof Html5Qrcode==="undefined"){say("স্ক্যানার লোড হয়নি",1);return}
+let ok=0,fail=0;const q=new Html5Qrcode("rf");for(const f of fl){try{const t=await q.scanFile(f,false);add(S.mode==="load"||S.mode==="unload"?t:"1",1);ok++}catch(e){fail++}}
+try{q.clear()}catch(e){}if(ok)beep();say(ok+" টি যোগ"+(fail?", "+fail+" টি পড়া যায়নি":""),!ok)}
+
+function vRep(){const t=K.reduce((a,k)=>a+CAT[k][2],0),tot=K.reduce((a,k)=>a+cnt(S,k),0);
+const q=(l,i)=>`<div class="ck"><span>${l}</span><input type="text" inputmode="numeric" pattern="[0-9]*" style="width:110px" value="${esc(S.chk[i])}" oninput="num(this);sq(${i},this.value)"></div>`;
+return `<div class="card"><h2>শিফট শেষের হিসাব</h2><table><tr><th>Category</th><th>Target</th><th>Achieved</th></tr>${K.map(k=>`<tr><td>${CAT[k][1]}</td><td>${CAT[k][2]}</td><td><b>${cnt(S,k)}</b></td></tr>`).join("")}<tr><td><b>Total</b></td><td><b>${t}</b></td><td><b>${tot}</b></td></tr></table></div>
+<div class="card">${q("ক্ষতিগ্রস্ত প্লেট (Qty)",10)}${q("ভুল লোকেশনে থাকা (Qty)",9)}${q("VNA ডাউনটাইম (min)",12)}<label>টার্গেট অর্জন না করার কারণ</label><textarea rows="4" oninput="S.reason=this.value;save()">${esc(S.reason)}</textarea></div>
+<div class="row"><button class="pri" onclick="doPrint(S)">প্রিন্ট</button><button onclick="newSheet()">নতুন শিট</button></div>`}
+function newSheet(){if(confirm("নতুন শিট শুরু করবেন? বর্তমান শিট হিস্ট্রিতে সেভ হবে।")){saveH(S);const p=S.p;S=fresh();Object.assign(S.p,{name:p.name,desig:p.desig,id:p.id});warn=false;save();render()}}
+function stat(d,i){const c=CH[i][1],v=d.chk[i+1];if(Array.isArray(c))return c.map(o=>(v===o?"&#9745; ":"&#9744; ")+o).join(" &nbsp; ");return c==="min"?esc(v||"")+" min":"Qty: "+esc(v||"")}
+function sheet(d){const p=d.p,t=K.reduce((a,k)=>a+CAT[k][2],0),tot=K.reduce((a,k)=>a+cnt(d,k),0),mx=Math.max(d.U.length,d.L.length);
+let r1="";for(let i=0;i<30;i++)r1+=`<tr><td style="width:10%">${i+1}</td><td>${esc(d.U[i]||"")}</td><td style="width:10%">${i+1}</td><td>${esc(d.L[i]||"")}</td></tr>`;
+let h=`<div class="pg"><div class="L"><table class="st"><tr><td>Operator: <b>${esc(p.name)}</b> ${esc(p.desig)}</td><td style="width:22%">ID: <b>${esc(p.id)}</b></td><td style="width:22%">Shift: <b>${esc(SH[p.shift]||"")}</b></td><td style="width:16%"><b>${esc(p.vna)}</b></td></tr></table>
+<table class="st ck14"><caption>Daily VNA Operator Work Status / Checklist</caption><tr><th style="width:8%">SL</th><th>Activity / Check Point</th><th style="width:31%">Daily Status</th></tr>${CH.map((c,i)=>`<tr><td>${i+1}</td><td>${c[0]}</td><td>${stat(d,i)}</td></tr>`).join("")}</table>
+<table class="st cat"><tr><th style="width:8%">SL</th><th>Category</th><th style="width:20%">Target</th><th style="width:20%">Achieved</th></tr>${["load","unload","stock","hk"].map((k,i)=>`<tr><td>${i+1}</td><td><i>${CAT[k][1]}</i></td><td><b>${CAT[k][2]}</b></td><td>${cnt(d,k)}</td></tr>`).join("")}<tr><td></td><td><b>Total</b></td><td><b>${t}</b></td><td><b>${tot}</b></td></tr></table>
+<table class="st rs"><tr><th>Reason For not Achieving Target (টার্গেট অর্জন না করার কারণ)</th></tr><tr><td style="vertical-align:top">${esc(d.reason)}</td></tr></table>
+<table class="st sg"><tr><th style="width:40%">Shift Supervisor Name</th><td>${esc(p.sup)}</td></tr><tr><th>Date</th><td>${fd(p.date)}</td></tr><tr><th>Signature</th><td></td></tr></table></div>
+<div class="R"><table class="st bx"><caption>Plate Load / Unload / Stock Check / Housekeeping Status</caption><tr><th>SL #</th><th>Unload Box Number</th><th>SL #</th><th>Load Box Number</th></tr>${r1}</table></div></div>`;
+for(let g=0;g*60+30<mx;g++){let r="";for(let i=0;i<30;i++){const a=30+g*60+i,b=a+30,c=(x,l)=>`<td style="width:6%">${x+1}</td><td>${esc(l[x]||"")}</td>`;r+=`<tr>${c(a,d.U)}${c(b,d.U)}${c(a,d.L)}${c(b,d.L)}</tr>`}
+h+=`<div class="pg"><div class="F"><table class="st bx"><caption>Plate Load / Unload Status (continued)</caption><tr><th>SL #</th><th>Unload Box Number</th><th>SL #</th><th>Unload Box Number</th><th>SL #</th><th>Load Box Number</th><th>SL #</th><th>Load Box Number</th></tr>${r}</table></div></div>`}
+h+=`<div class="pg"><div class="F"><table class="st"><tr><td>Operator: <b>${esc(p.name)}</b> ${esc(p.desig)}</td><td>ID: <b>${esc(p.id)}</b></td><td>Shift: <b>${esc(SH[p.shift]||"")}</b></td><td><b>${esc(p.vna)}</b></td><td>${fd(p.date)}</td></tr></table>
+<table class="st sm"><caption>Summary</caption><tr><th>Category</th><th>Target</th><th>Achieved</th><th>Difference</th></tr>${["load","unload","stock","hk"].map(k=>`<tr><td>${CAT[k][1]}</td><td>${CAT[k][2]}</td><td>${cnt(d,k)}</td><td>${cnt(d,k)-CAT[k][2]}</td></tr>`).join("")}<tr><td><b>Total</b></td><td><b>${t}</b></td><td><b>${tot}</b></td><td><b>${tot-t}</b></td></tr></table></div></div>`;
+return h}
+function doPrint(d){if(d===S)saveH(S);$("sheet").innerHTML=sheet(d);try{window.print()}catch(e){}}
+
+function vHist(){const a=H();return `<div class="card"><h2>হিস্ট্রি</h2><button onclick="view('main')" style="margin-bottom:12px">পিছনে</button><input placeholder="তারিখ বা নাম দিয়ে খুঁজুন" oninput="hf(this.value)" style="margin-bottom:12px"><div id="hl">${hl(a)}</div>${a.length?`<button style="width:100%;margin-top:8px" onclick="exp()">ব্যাকআপ ডাউনলোড</button>`:""}</div>`}
+function hl(a){return a.length?a.map(x=>`<div class="hc" onclick="hopen(${x.sid})"><b>${fd(x.p.date)}</b> &nbsp; ${esc(SH[x.p.shift]||"")} &nbsp; ${esc(x.p.vna)}<br>${esc(x.p.name)}<br><span style="color:var(--m)">আনলোড ${x.U.length} | লোড ${x.L.length} | স্টক ${x.st} | হাউসকিপিং ${x.hk}</span></div>`).join(""):`<span style="color:var(--m)">কিছু নেই</span>`}
+function hf(q){q=q.toLowerCase();$("hl").innerHTML=hl(H().filter(x=>(fd(x.p.date)+x.p.name+x.p.id+x.p.vna).toLowerCase().includes(q)))}
+function hopen(id){HV=H().find(x=>x.sid===id);V="hv";render()}
+function exp(){try{const b=new Blob([JSON.stringify(H())],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="vna-history.json";a.click()}catch(e){}}
+function vHV(){const x=HV;return `<div class="card"><h2>${fd(x.p.date)} ${esc(SH[x.p.shift]||"")} ${esc(x.p.vna)}</h2><p>${esc(x.p.name)} (${esc(x.p.id)})</p><p style="color:var(--m)">আনলোড ${x.U.length} | লোড ${x.L.length} | স্টক ${x.st} | হাউসকিপিং ${x.hk}</p>
+<div class="row"><button class="pri" onclick="doPrint(HV)">প্রিন্ট / PDF</button><button onclick="if(confirm('মুছবেন?')){const id=HV.sid;localStorage.setItem('vdp_h',JSON.stringify(H().filter(z=>z.sid!==id)));view('hist')}">মুছুন</button></div><button style="margin-top:12px" onclick="view('hist')">পিছনে</button></div>`}
+function vAbout(){return `<div class="card" style="text-align:center;padding:30px 18px"><svg width="84" height="84" viewBox="0 0 48 48"><rect width="48" height="48" rx="12" fill="#f2b400"/><text x="24" y="30" text-anchor="middle" font-family="Orbitron,Arial,sans-serif" font-weight="800" font-size="14.5" fill="#1a1400">VNA</text></svg><h2 style="margin-top:14px">VNA Daily Production</h2><p style="color:var(--m)">This app develop by Piash Hossain.</p><p style="color:var(--m)">Contact : <a style="color:var(--a)" href="mailto:mdpiashhossain2024@gmail.com">mdpiashhossain2024@gmail.com</a></p><button onclick="view('main')">পিছনে</button></div>`}
+
+function render(){stopCam();pause=false;
+const T=[["start","শুরু"],["scan","স্ক্যান"],["rep","হিসাব ও প্রিন্ট"]];
+$("nav").innerHTML=T.map(t=>`<button class="${V==="main"&&S.tab===t[0]?"on":""}" onclick="go('${t[0]}')">${t[1]}</button>`).join("");
+$("app").innerHTML=V==="hist"?vHist():V==="about"?vAbout():V==="hv"?vHV():{start:vStart,scan:vScan,rep:vRep}[S.tab]();
+refresh();window.scrollTo(0,0)}
+render();
+</script></body></html>
