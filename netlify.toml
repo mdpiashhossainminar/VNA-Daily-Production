@@ -1,0 +1,6 @@
+# This repository is a native Android (Gradle/Kotlin) app, so there is no
+# Node.js build. Netlify only serves the static landing page in /site.
+# These settings override the build command and publish directory set in the UI.
+[build]
+  command = "echo 'No build step: publishing static landing page'"
+  publish = "site"
